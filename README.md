@@ -2,7 +2,33 @@
 # WindowsDumpWriter
 Library function that output dump on Windows.
 
-# Usage
+# Library Usage
+PM> Install-Package [WindowsDumpWriter](https://www.nuget.org/packages/WindowsDumpWriter/)
+```
+var result = WindowsDumpWriter.Write(
+    outputFilePath,
+    dumpType,
+    processId,
+    threadId,
+    address);
+```
+
+# App Usage
+## CommandLine Example
+```
+WindowsDumpWriter.exe --Output "./MiniDump.dmp" --DumpType 6182 --ProcessId 39520
+```
+```
+WindowsDumpWriter.exe --Output "./MiniDump.dmp" --DumpType 6182 --ProcessId 39520 --ThreadId 46800 --ExceptionAddress 0x000000FD0E4FEBE0
+```
+| Param | Description |
+|---|---|
+| --Output | Output dump file path. |
+| --DumpType | DumpType |
+| --ProcessId | Dump process id. |
+| --ThreadId | ThreadId in exception info. |
+| --ExceptionAddress | ExceptionAddress in exception info. |
+
 ## VC++ Example
 ```cpp
 #include <windows.h>
