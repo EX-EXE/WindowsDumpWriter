@@ -30,7 +30,7 @@ jobs:
       run: dotnet restore
     
     - name: Nuget Pack
-      run: dotnet pack ./src/WindowsDumpWriter/ -c Release -p:Version=${{ env.VERSION }} -o $env:RUNNER_TEMP/nuget/
+      run: dotnet pack ./src/WindowsDumpWriter/ -c Release -p:Version=${{ env.VERSION }} -o ${{ runner.temp }}/nuget/
       
     - name: Nuget Push 
-      run: dotnet nuget push "$env:RUNNER_TEMP/nuget/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push "${{ runner.temp }}/nuget/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
