@@ -28,7 +28,7 @@ int GenerateDump(EXCEPTION_POINTERS* exceptionPtr)
 	swprintf(cmd, 
 		bufferSize,
 		L"\"%s\" --Output \"%s\" --DumpType %d --ProcessId %d --ThreadId %d --ExceptionAddress 0x%p",
-		L"./WindowsDumpWriter.App.exe",
+		L"./WindowsDumpWriter.exe",
 		L"./MiniDump.dmp",
 		dumpType,
 		processId,
