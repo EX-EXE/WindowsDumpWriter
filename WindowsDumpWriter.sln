@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AFE63F17-D6D1-4C18-A215-634E864A1AD2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsDumpWriter", "src\WindowsDumpWriter\WindowsDumpWriter.csproj", "{1CD62A7E-40FF-4808-8F12-A63C11B77127}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsDumpWriter.App", "src\WindowsDumpWriter.App\WindowsDumpWriter.App.csproj", "{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1CD62A7E-40FF-4808-8F12-A63C11B77127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD62A7E-40FF-4808-8F12-A63C11B77127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD62A7E-40FF-4808-8F12-A63C11B77127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD62A7E-40FF-4808-8F12-A63C11B77127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1CD62A7E-40FF-4808-8F12-A63C11B77127} = {AFE63F17-D6D1-4C18-A215-634E864A1AD2}
+		{46E00C1D-5168-43E0-A4D7-DF470DD9A7AD} = {AFE63F17-D6D1-4C18-A215-634E864A1AD2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {45226699-C758-4758-9936-2DEA4D395D1B}
+	EndGlobalSection
+EndGlobal

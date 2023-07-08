@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WindowsDumpWriter.App": {
+      "commandName": "Project",
+      "commandLineArgs": "--Output \"./Test.dmp\" --DumpType 6182 --ProcessId 39520 --ThreadId 46800 --ExceptionAddress 0x000000FD0E4FEBE0"
+    }
+  }
+}
