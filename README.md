@@ -1,3 +1,4 @@
+[![NuGet version](https://badge.fury.io/nu/WindowsDumpWriter.svg)](https://badge.fury.io/nu/WindowsDumpWriter)
 # WindowsDumpWriter
 
 # Usage
