@@ -27,7 +27,7 @@ jobs:
         include:
           - platform: "windows-latest"
             runtime: "win-x64"
-            publish: WindowsDumpWriter.exe
+            publish: WindowsDumpWriter.App.exe
             upload: WindowsDumpWriter.exe
     runs-on: ${{ matrix.platform }}
     
