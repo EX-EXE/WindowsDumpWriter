@@ -1,5 +1,6 @@
 [![NuGet version](https://badge.fury.io/nu/WindowsDumpWriter.svg)](https://badge.fury.io/nu/WindowsDumpWriter)
 # WindowsDumpWriter
+Library function that output dump on Windows.
 
 # Usage
 ## VC++ Example
