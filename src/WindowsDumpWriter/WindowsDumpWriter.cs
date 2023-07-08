@@ -6,6 +6,11 @@ namespace WindowsDumpWriter;
 
 public class WindowsDumpWriter
 {
+    public static bool Write(string outputDumpPath, uint minidumpType, int processId)
+    {
+        return Write(outputDumpPath, minidumpType, processId, -1, -1);
+    }
+
     public static bool Write(string outputDumpPath, uint minidumpType, int processId, int threadId, long address)
     {
         // Get Process
