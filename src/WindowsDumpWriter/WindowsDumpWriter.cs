@@ -13,23 +13,16 @@ public class WindowsDumpWriter
 
     public static bool Write(string outputDumpPath, uint minidumpType, int processId, int threadId, long address)
     {
-        // Get Process
-        var process = Process.GetProcessById(processId);
-        if (process == null)
-        {
-            return false;
-        }
-
         // Get Handle
         var processHandle = IntPtr.Zero;
-        var threadHandles = Array.Empty<IntPtr>();
+        //var threadHandles = Array.Empty<IntPtr>();
         try
         {
             processHandle = OpenProcess(processId);
-            threadHandles = OpenAllThread(processId);
+            //threadHandles = OpenAllThread(processId);
 
             // Dump
-            return WriteDump(outputDumpPath, minidumpType, process, threadId, address);
+            return WriteDump(outputDumpPath, minidumpType, processHandle, processId, threadId, address);
         }
         finally
         {
@@ -39,15 +32,15 @@ public class WindowsDumpWriter
                 CloseHandle(processHandle);
                 processHandle = IntPtr.Zero;
             }
-            foreach (var threadHandle in threadHandles)
-            {
-                CloseHandle(threadHandle);
-            }
-            threadHandles = Array.Empty<IntPtr>();
+            //foreach (var threadHandle in threadHandles)
+            //{
+            //    CloseHandle(threadHandle);
+            //}
+            //threadHandles = Array.Empty<IntPtr>();
         }
     }
 
-    private static bool WriteDump(string outputDumpPath, uint minidumpType, Process process, int threadId, long address)
+    private static bool WriteDump(string outputDumpPath, uint minidumpType, IntPtr processHandle, int processId, int threadId, long address)
     {
         // Write
         var dumpFileHandle = NativeMethods.CreateFile(
@@ -70,8 +63,8 @@ public class WindowsDumpWriter
             {
                 // No Exception
                 success = NativeMethods.MiniDumpWriteDump(
-                    process.Handle,
-                    (uint)process.Id,
+                    processHandle,
+                    (uint)processId,
                     dumpFileHandle,
                     minidumpType,
                     IntPtr.Zero,
@@ -88,8 +81,8 @@ public class WindowsDumpWriter
                     ThreadId = (uint)threadId,
                 };
                 success = NativeMethods.MiniDumpWriteDump(
-                    process.Handle,
-                    (uint)process.Id,
+                    processHandle,
+                    (uint)processId,
                     dumpFileHandle,
                     minidumpType,
                     ref exceptionInfo,
@@ -115,45 +108,45 @@ public class WindowsDumpWriter
         return processHandle;
     }
 
-    private static IntPtr[] OpenAllThread(int processId)
-    {
-        List<IntPtr> threadHandles = new List<IntPtr>();
+    //private static IntPtr[] OpenAllThread(int processId)
+    //{
+    //    List<IntPtr> threadHandles = new List<IntPtr>();
 
-        var snapshotHandle = NativeMethods.CreateToolhelp32Snapshot(
-            NativeMethods.CreateToolhelp32SnapshotFlags.TH32CS_SNAPTHREAD,
-            0);
-        if (snapshotHandle != IntPtr.Zero)
-        {
-            try
-            {
-                var threadEntry = new NativeMethods.THREADENTRY32();
-                threadEntry.dwSize = (uint)Marshal.SizeOf(threadEntry);
-                if (NativeMethods.Thread32First(snapshotHandle, ref threadEntry))
-                {
-                    do
-                    {
-                        if (threadEntry.th32OwnerProcessID == (uint)processId)
-                        {
-                            var threadHandle = NativeMethods.OpenThread(
-                                NativeMethods.ThreadAccessFlags.THREAD_ALL_ACCESS,
-                                false,
-                                threadEntry.th32ThreadID);
-                            if (threadHandle != IntPtr.Zero)
-                            {
-                                threadHandles.Add(threadHandle);
-                            }
-                        }
-                    }
-                    while (NativeMethods.Thread32Next(snapshotHandle, ref threadEntry));
-                }
-            }
-            finally
-            {
-                NativeMethods.CloseHandle(snapshotHandle);
-            }
-        }
-        return threadHandles.ToArray();
-    }
+    //    var snapshotHandle = NativeMethods.CreateToolhelp32Snapshot(
+    //        NativeMethods.CreateToolhelp32SnapshotFlags.TH32CS_SNAPTHREAD,
+    //        0);
+    //    if (snapshotHandle != IntPtr.Zero)
+    //    {
+    //        try
+    //        {
+    //            var threadEntry = new NativeMethods.THREADENTRY32();
+    //            threadEntry.dwSize = (uint)Marshal.SizeOf(threadEntry);
+    //            if (NativeMethods.Thread32First(snapshotHandle, ref threadEntry))
+    //            {
+    //                do
+    //                {
+    //                    if (threadEntry.th32OwnerProcessID == (uint)processId)
+    //                    {
+    //                        var threadHandle = NativeMethods.OpenThread(
+    //                            NativeMethods.ThreadAccessFlags.THREAD_ALL_ACCESS,
+    //                            false,
+    //                            threadEntry.th32ThreadID);
+    //                        if (threadHandle != IntPtr.Zero)
+    //                        {
+    //                            threadHandles.Add(threadHandle);
+    //                        }
+    //                    }
+    //                }
+    //                while (NativeMethods.Thread32Next(snapshotHandle, ref threadEntry));
+    //            }
+    //        }
+    //        finally
+    //        {
+    //            NativeMethods.CloseHandle(snapshotHandle);
+    //        }
+    //    }
+    //    return threadHandles.ToArray();
+    //}
 
 
 }
